@@ -10,13 +10,21 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "@react-navigation/drawer": "^6.4.3",
+    "@react-navigation/native": "^6.0.11",
+    "@react-navigation/stack": "^6.2.2",
     "@types/react-native": "^0.69.3",
     "@types/styled-components": "^5.1.25",
     "@types/typescript": "^2.0.0",
     "react": "18.0.0",
     "react-native": "0.69.1",
+    "react-native-gesture-handler": "^2.5.0",
     "react-native-linear-gradient": "^2.6.2",
-    "styled-components": "^5.3.5"
+    "react-native-reanimated": "^2.9.1",
+    "react-native-safe-area-context": "^4.3.1",
+    "react-native-screens": "^3.15.0",
+    "styled-components": "^5.3.5",
+    "zustand": "^4.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",

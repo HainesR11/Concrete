@@ -1,6 +1,9 @@
 import React from 'react';
 import styled from 'styled-components/native';
 import LinearGradient from 'react-native-linear-gradient';
+import {useRootStore} from '../../../../store';
+import {Button} from 'react-native';
+import {useState} from 'react';
 
 const LoginContainer = styled.SafeAreaView`
   display: flex;
@@ -54,17 +57,20 @@ const Text = styled.Text`
   color: black;
 `;
 
-const RegisterButton = styled.Button`
-  margin-top: 20px;
-  background-color: white;
-  border: none;
-  text-decoration: none;
+const RegisterButton = styled.TouchableOpacity`
+  background-color: #d9d9d9;
+  padding: 20px 70px;
+`;
+
+const GradientContainer = styled.TouchableOpacity`
+  width: 60%;
+  height: 20%;
 `;
 
 const styles = {
   gradient: {
-    width: '60%',
-    height: '20%',
+    width: '100%',
+    height: '100%',
     borderRadius: 5,
     alignItems: 'center',
     justifyContent: 'center',
@@ -72,11 +78,17 @@ const styles = {
 };
 
 const Login = () => {
+  const onPress = () => {
+    setIsLoading;
+  };
+
+  const setIsLoading = useRootStore(state => state.setIsLoading);
+
   return (
     <LoginContainer>
       <LogoContainer>
         <Logo
-          source={require('../../assets/images/Concrete-logos_transparent.png')}
+          source={require('../../../assets/images/Concrete-logos_transparent.png')}
         />
       </LogoContainer>
       <LoginTextContainer>
@@ -87,16 +99,20 @@ const Login = () => {
         <InputField placeholder="Password" secureTextEntry={true} />
       </InputContainer>
       <ButtonContainer>
-        <LinearGradient
-          style={styles.gradient}
-          colors={['#04b4ff', '#0500ff', '#b400ff', '#ff00d6']}>
-          <LoginButton>Log in</LoginButton>
-        </LinearGradient>
+        <GradientContainer onPress={() => setIsLoading()}>
+          <LinearGradient
+            style={styles.gradient}
+            colors={['#04b4ff', '#0500ff', '#b400ff', '#ff00d6']}>
+            <LoginButton>Log in</LoginButton>
+          </LinearGradient>
+        </GradientContainer>
         <InputContainer>
           <Text>Or</Text>
         </InputContainer>
         <InputContainer>
-          <RegisterButton title="Create Account" />
+          <RegisterButton>
+            <Text>Create Account</Text>
+          </RegisterButton>
         </InputContainer>
       </ButtonContainer>
     </LoginContainer>
