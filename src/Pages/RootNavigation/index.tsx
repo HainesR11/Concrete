@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
@@ -7,9 +7,12 @@ import Login from '../Unauthenticated/login';
 import Home from '../Authenticated/Home';
 import {useRootStore} from '../../../store';
 import Loading from '../Unauthenticated/Loading';
+import CreateAccount from '../Unauthenticated/CreateAccount';
 
 export type TStackNavigationParams = {
   Login: undefined;
+  Loading: undefined;
+  CreateAccount: undefined;
 };
 
 export type TAuthedStackNavigationParams = {
@@ -40,6 +43,7 @@ const RootNavigation = () => {
             headerShown: false,
           }}>
           <Stack.Screen name="Login" component={Login} />
+          <Stack.Screen name="CreateAccount" component={CreateAccount} />
         </Stack.Navigator>
       )}
     </NavigationContainer>
