@@ -1,9 +1,12 @@
 import React from 'react';
 import styled from 'styled-components/native';
 import LinearGradient from 'react-native-linear-gradient';
-import {useRootStore} from '../../../../store';
-import {Button} from 'react-native';
-import {useState} from 'react';
+import { useRootStore } from '../../../../store';
+import { DrawerNavigationProp } from '@react-navigation/drawer';
+import { TStackNavigationParams } from '../../RootNavigation';
+import { useNavigation } from '@react-navigation/native';
+import { useState } from 'react';
+import Loading from '../Loading';
 
 const LoginContainer = styled.SafeAreaView`
   display: flex;
@@ -67,6 +70,8 @@ const GradientContainer = styled.TouchableOpacity`
   height: 20%;
 `;
 
+type TNavigationProps = DrawerNavigationProp<TStackNavigationParams>;
+
 const styles = {
   gradient: {
     width: '100%',
@@ -78,11 +83,16 @@ const styles = {
 };
 
 const Login = () => {
-  const onPress = () => {
-    setIsLoading;
-  };
+  // const onPress = () => {
+  //   setIsLoading;
+  // };
 
-  const setIsLoading = useRootStore(state => state.setIsLoading);
+  const [isLoading, setIsLoading] = useState(false);
+  const navigation = useNavigation<TNavigationProps>();
+
+  if (isLoading) {
+    return <Loading />;
+  }
 
   return (
     <LoginContainer>
@@ -99,9 +109,15 @@ const Login = () => {
         <InputField placeholder="Password" secureTextEntry={true} />
       </InputContainer>
       <ButtonContainer>
-        <GradientContainer onPress={() => setIsLoading()}>
+        <GradientContainer onPress={() => setIsLoading(!isLoading)}>
           <LinearGradient
-            style={styles.gradient}
+            style={{
+              width: '100%',
+              height: '100%',
+              borderRadius: 5,
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
             colors={['#04b4ff', '#0500ff', '#b400ff', '#ff00d6']}>
             <LoginButton>Log in</LoginButton>
           </LinearGradient>
@@ -110,7 +126,7 @@ const Login = () => {
           <Text>Or</Text>
         </InputContainer>
         <InputContainer>
-          <RegisterButton>
+          <RegisterButton onPress={() => navigation.navigate('CreateAccount')}>
             <Text>Create Account</Text>
           </RegisterButton>
         </InputContainer>
