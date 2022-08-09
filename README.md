@@ -3,7 +3,7 @@
 ## Introduction
 This is the React Native Concrete Project Planner, which contains a generic TypeScript starter project.
 
-At minimum this applicatin should allow users to create nd visualise a project timeline include when the project/Task is completed.
+At minimum this application should allow users to create and visualise a project timeline include when the project/Task is completed.
 Additional features include sharing tasks with other members of the service 
 
 ## Project Status
