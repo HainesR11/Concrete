@@ -86,13 +86,8 @@ const Login = () => {
   // const onPress = () => {
   //   setIsLoading;
   // };
-
-  const [isLoading, setIsLoading] = useState(false);
+  const setIsLoading = useRootStore((state) => state.setIsLoading);
   const navigation = useNavigation<TNavigationProps>();
-
-  if (isLoading) {
-    return <Loading />;
-  }
 
   return (
     <LoginContainer>
@@ -109,7 +104,7 @@ const Login = () => {
         <InputField placeholder="Password" secureTextEntry={true} />
       </InputContainer>
       <ButtonContainer>
-        <GradientContainer onPress={() => setIsLoading(!isLoading)}>
+        <GradientContainer onPress={() => setIsLoading()}>
           <LinearGradient
             style={{
               width: '100%',

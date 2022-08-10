@@ -1,6 +1,6 @@
 import React from 'react';
-import {useEffect} from 'react';
-import {Animated, Easing} from 'react-native';
+import { useEffect } from 'react';
+import { Animated, Easing } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import styled from 'styled-components/native';
 
@@ -96,8 +96,8 @@ const Loading = () => {
             },
           ]}>
           <LinearGradient
-            start={{x: 1.0, y: 0.0}}
-            end={{x: 1.0, y: 1.0}}
+            start={{ x: 1.0, y: 0.0 }}
+            end={{ x: 1.0, y: 1.0 }}
             style={{
               width: 200,
               height: 200,

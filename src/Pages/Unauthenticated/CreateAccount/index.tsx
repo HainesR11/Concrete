@@ -81,14 +81,12 @@ const LoginText = styled.Text`
   color: grey;
 `;
 
-const styles = {
-  gradient: {
-    width: '100%',
-    height: '100%',
-    borderRadius: 5,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+const stylesGradient = {
+  width: '100%',
+  height: '100%',
+  borderRadius: 5,
+  alignItems: 'center',
+  justifyContent: 'center',
 };
 
 const CreateAccount = () => {
@@ -110,18 +108,17 @@ const CreateAccount = () => {
         </NameContainer>
         <Input placeholder="Email" width={350} marginRight={0} />
         <Input placeholder="Username" width={350} marginRight={0} />
-        <Input placeholder="Password" width={350} marginRight={0} />
+        <Input
+          placeholder="Password"
+          width={350}
+          marginRight={0}
+          secureTextEntry={true}
+        />
       </InputContainer>
       <ButtonContainer>
         <GradientContainer onPress={() => setIsLoading()}>
           <LinearGradient
-            style={{
-              width: '100%',
-              height: '100%',
-              borderRadius: 5,
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}
+            style={stylesGradient}
             colors={['#04b4ff', '#0500ff', '#b400ff', '#ff00d6']}>
             <LoginButton>Log in</LoginButton>
           </LinearGradient>
