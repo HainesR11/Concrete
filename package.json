@@ -12,6 +12,10 @@
     "build:ios": "react-native bundle --entry-file index.js --platform ios --dev false --bundle-output ios/main.jsbundle --assets-dest ios"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.1.2",
+    "@fortawesome/free-regular-svg-icons": "^6.1.2",
+    "@fortawesome/free-solid-svg-icons": "^6.1.2",
+    "@fortawesome/react-fontawesome": "^0.2.0",
     "@react-navigation/drawer": "^6.4.3",
     "@react-navigation/native": "^6.0.11",
     "@react-navigation/stack": "^6.2.2",
@@ -20,6 +24,8 @@
     "@types/typescript": "^2.0.0",
     "react": "18.0.0",
     "react-native": "0.69.1",
+    "react-native-calendar-strip": "^2.2.6",
+    "react-native-date-picker-light": "^1.0.8",
     "react-native-gesture-handler": "^2.5.0",
     "react-native-linear-gradient": "^2.6.2",
     "react-native-reanimated": "^2.9.1",
