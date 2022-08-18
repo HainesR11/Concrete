@@ -66,6 +66,7 @@ stages:
             inputs:
               command: ci
               customRegistry: 'useFeed'
+              customFeed: $(artifactFeedId)
             displayName: Install
           
           - task: Npm@1
