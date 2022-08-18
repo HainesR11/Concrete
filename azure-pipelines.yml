@@ -66,15 +66,6 @@ stages:
             inputs:
               versionSpec: $(nodeVersion)
             displayName: Node Install $(nodeVersion)
-          
-          - task: Npm@1
-            inputs:
-              command: custom
-              customCommand: 'version from-git --force --no-git-tag-version'
-              customRegistry: 'useFeed'
-              customFeed: $(artifactFeedId)
-            displayName: Get Current Version
-
 
           - task: Npm@1
             inputs:
