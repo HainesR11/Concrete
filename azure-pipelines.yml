@@ -4,18 +4,59 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
 
 trigger:
-- main
+  batch: flase
+  branches:
+  include: 
+    - main 
+
+pr: 
+  autoCancel: false
+  drafts: true
+  branches:
+    include:
+      - main
 
 pool:
   vmImage: ubuntu-latest
 
-steps:
-- task: NodeTool@0
-  inputs:
-    versionSpec: '10.x'
-  displayName: 'Install Node.js'
+stages: 
+  - stage: Build
+    jobs:  
+      - job: Build
+        displayName: build
 
-- script: |
-    npm install
-    npm run build
-  displayName: 'npm install and build'
+        steps:
+          - checkout: self
+            clean: true
+            persistCredentials: true
+            displayName: Checkout
+
+          - task: Npm@1
+            inputs:
+              customCommand: 'install -g npm@$(npmVersion)'
+            displayName: Npm Install $(npmVersion)
+
+          - task: Npm@1
+            inputs:
+              command: ci
+              customRegistry: 'useFeed'
+            displayName: Install
+          
+          - task: Npm@1
+            inputs:
+              command: custom
+              customCommand: run test:unit
+              customRegistry: 'useFeed'
+            displayName: Unit Tests
+
+          - script: |
+             npm install
+             npm run build:android
+            displayName: Build Android
+          
+          - script: | 
+             npm install
+             npm run build:ios
+            displayName: Build IOS
+
+

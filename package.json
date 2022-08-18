@@ -9,8 +9,7 @@
     "test:unit": "jest --config .jest.unit.json",
     "lint": "eslint .",
     "build:android": "react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res",
-    "build:ios": "react-native bundle --entry-file index.js --platform ios --dev false --bundle-output ios/main.jsbundle --assets-dest ios",
-    "build": "tsc -p tsconfig.app.json && clear-package-json package.json > dist/package.json"
+    "build:ios": "react-native bundle --entry-file index.js --platform ios --dev false --bundle-output ios/main.jsbundle --assets-dest ios"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.1.2",
@@ -20,6 +19,7 @@
     "@react-navigation/drawer": "^6.4.3",
     "@react-navigation/native": "^6.0.11",
     "@react-navigation/stack": "^6.2.2",
+    "@tsconfig/node14": "^1.0.3",
     "@types/react-native": "^0.69.3",
     "@types/styled-components": "^5.1.25",
     "@types/typescript": "^2.0.0",
