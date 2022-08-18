@@ -67,6 +67,31 @@ stages:
               versionSpec: $(nodeVersion)
             displayName: Node Install $(nodeVersion)
           
+          - task: Npm@1
+            inputs:
+              command: custom
+              customCommand: 'version from-git --force --no-git-tag-version'
+              customRegistry: 'useFeed'
+              customFeed: $(artifactFeedId)
+            displayName: Get Current Version
+
+
+          - task: Npm@1
+            inputs:
+              command: custom
+              customCommand: 'version preminor --preid=pr.$(System.PullRequest.PullRequestNumber)+$(short_hash) --force --no-git-tag-version'
+              customRegistry: 'useFeed'
+              customFeed: $(artifactFeedId)
+            condition: and(succeeded(), ne(variables.isMain, 'true'))
+            displayName: Version Pull Request
+
+          - bash: |
+              npmVersionString=$(node -p "require('./package.json').version")
+              echo "##vso[build.updatebuildnumber]$npmVersionString"
+            workingDirectory: '$(Build.SourcesDirectory)'
+            displayName: Set Build Number
+
+          
           # - task: Npm@1
           #   inputs:
           #     command: custom
@@ -82,5 +107,11 @@ stages:
           - script: | 
              npm run build:ios
             displayName: Build IOS
+
+          
+
+          - bash: git reset --hard
+            workingDirectory: '$(Build.SourcesDirectory)'
+            displayName: Clean modified files
 
 

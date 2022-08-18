@@ -23,6 +23,7 @@
     "@types/react-native": "^0.69.3",
     "@types/styled-components": "^5.1.25",
     "@types/typescript": "^2.0.0",
+    "jest-junit": "^14.0.0",
     "react": "18.0.0",
     "react-native": "0.69.1",
     "react-native-calendar-strip": "^2.2.6",
