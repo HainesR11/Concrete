@@ -26,7 +26,7 @@ variables:
 
   # NodeJS Version
   - name: 'nodeVersion'
-    value: '14.17.6'
+    value: '18.7.0'
 
   # NPM Version
   - name: 'npmVersion'
@@ -61,6 +61,11 @@ stages:
               key: 'npm | "$(Agent.OS)" | package-lock.json'
               path: $(npm_config_cache)
             displayName: Npm Module Cache
+
+          - task: NodeTool@0
+            inputs:
+              versionSpec: $(nodeVersion)
+            displayName: Node Install $(nodeVersion)
 
           - task: Npm@1
             inputs:
