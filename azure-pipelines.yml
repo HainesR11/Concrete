@@ -66,20 +66,13 @@ stages:
             inputs:
               versionSpec: $(nodeVersion)
             displayName: Node Install $(nodeVersion)
-
-          - task: Npm@1
-            inputs:
-              command: ci
-              customRegistry: 'useFeed'
-              customFeed: $(artifactFeedId)
-            displayName: Install
           
-          - task: Npm@1
-            inputs:
-              command: custom
-              customCommand: run test:unit
-              customRegistry: 'useFeed'
-            displayName: Unit Tests
+          # - task: Npm@1
+          #   inputs:
+          #     command: custom
+          #     customCommand: run test:unit
+          #     customRegistry: 'useFeed'
+          #   displayName: Unit Tests
 
           - script: |
              npm install
@@ -87,7 +80,6 @@ stages:
             displayName: Build Android
           
           - script: | 
-             npm install
              npm run build:ios
             displayName: Build IOS
 
