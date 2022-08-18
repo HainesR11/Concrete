@@ -19,6 +19,31 @@ pr:
 pool:
   vmImage: ubuntu-latest
 
+variables:
+  # Disable Husky in the CI environment
+  - name: 'husky'
+    value: 0
+
+  # NodeJS Version
+  - name: 'nodeVersion'
+    value: '14.17.6'
+
+  # NPM Version
+  - name: 'npmVersion'
+    value: '7'
+
+  # NPM Cache Directory
+  - name: 'npm_config_cache'
+    value: $(Pipeline.Workspace)/.npm
+
+  # Are we building the main branch
+  - name: 'isMain'
+    value: $[eq(variables['Build.SourceBranch'], 'refs/heads/main')]
+
+  # Azure Artifact Feed, this must align with the values in .npmrc
+  - name: artifactFeedId
+    value: '3387aaee-45af-46d2-8edc-e275fb504a12'
+
 stages: 
   - stage: Build
     jobs:  
@@ -30,10 +55,17 @@ stages:
             clean: true
             persistCredentials: true
             displayName: Checkout
+            
+          - task: Cache@2
+            inputs:
+              key: 'npm | "$(Agent.OS)" | package-lock.json'
+              path: $(npm_config_cache)
+            displayName: Npm Module Cache
 
           - task: Npm@1
             inputs:
               customCommand: 'install -g npm@$(npmVersion)'
+              customRegistry: 'useFeed'
             displayName: Npm Install $(npmVersion)
 
           - task: Npm@1
