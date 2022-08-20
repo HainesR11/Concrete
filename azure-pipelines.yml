@@ -46,8 +46,6 @@ stages:
     jobs:  
       - job: Build
         displayName: build
-        pool:
-          name: aci-es-agents
 
         steps:
           - checkout: self
