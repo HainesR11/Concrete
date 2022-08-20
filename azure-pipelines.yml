@@ -16,9 +16,6 @@ pr:
     include:
       - main
 
-pool:
-  vmImage: ubuntu-latest
-
 variables:
   # Disable Husky in the CI environment
   - name: 'husky'
@@ -49,6 +46,8 @@ stages:
     jobs:  
       - job: Build
         displayName: build
+        pool:
+          name: aci-es-agents
 
         steps:
           - checkout: self
