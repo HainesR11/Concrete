@@ -68,8 +68,6 @@ stages:
             inputs:
               command: custom
               customCommand: 'install -g npm@$(npmVersion)'
-              customRegistry: 'useFeed'
-              customFeed: $(artifactFeedId)
             displayName: Npm Install $(npmVersion)
 
           - task: Npm@1
