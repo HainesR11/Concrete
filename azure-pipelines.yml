@@ -27,7 +27,7 @@ variables:
 
   # NPM Version
   - name: 'npmVersion'
-    value: '7'
+    value: '8.15.0'
 
   # NPM Cache Directory
   - name: 'npm_config_cache'
@@ -63,7 +63,7 @@ stages:
             inputs:
               versionSpec: $(nodeVersion)
             displayName: Node Install $(nodeVersion)
-            
+
           - task: Npm@1
             inputs:
               command: custom
