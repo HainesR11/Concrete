@@ -63,6 +63,14 @@ stages:
             inputs:
               versionSpec: $(nodeVersion)
             displayName: Node Install $(nodeVersion)
+            
+          - task: Npm@1
+            inputs:
+              command: custom
+              customCommand: 'install -g npm@$(npmVersion)'
+              customRegistry: 'useFeed'
+              customFeed: $(artifactFeedId)
+            displayName: Npm Install $(npmVersion)
 
           - task: Npm@1
             inputs:
@@ -79,6 +87,7 @@ stages:
             workingDirectory: '$(Build.SourcesDirectory)'
             displayName: Set Build Number
 
+
           
           # - task: Npm@1
           #   inputs:
@@ -86,16 +95,6 @@ stages:
           #     customCommand: run test:unit
           #     customRegistry: 'useFeed'
           #   displayName: Unit Tests
-
-          - script: |
-             npm install
-             npm run build:android --legacy-peer-deps
-            displayName: Build Android
-          
-          - script: | 
-             npm run build:ios
-            displayName: Build IOS
-
           
 
           - bash: git reset --hard
