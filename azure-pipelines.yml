@@ -45,7 +45,7 @@ stages:
   - stage: Build
     jobs:  
       - job: Build
-        displayName: build
+        displayName: Build
 
         steps:
           - checkout: self
@@ -89,7 +89,7 @@ stages:
 
           - script: |
              npm install
-             npm run build:android
+             npm run build:android --legacy-peer-deps
             displayName: Build Android
           
           - script: | 
