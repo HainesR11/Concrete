@@ -1,11 +1,11 @@
 import React from 'react';
-import {createDrawerNavigator} from '@react-navigation/drawer';
-import {NavigationContainer} from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 
 import Login from '../Unauthenticated/login';
 import Home from '../Authenticated/Home';
-import {useRootStore} from '../../../store';
+import { useRootStore } from '../../../store';
 import Loading from '../Unauthenticated/Loading';
 import CreateAccount from '../Unauthenticated/CreateAccount';
 
@@ -23,8 +23,8 @@ const Drawer = createDrawerNavigator<TAuthedStackNavigationParams>();
 const Stack = createStackNavigator<TStackNavigationParams>();
 
 const RootNavigation = () => {
-  const userTokenValue = useRootStore(state => state.userToken);
-  const isLoading = useRootStore(state => state.isLoading);
+  const userTokenValue = useRootStore((state) => state.userToken);
+  const isLoading = useRootStore((state) => state.isLoading);
 
   if (isLoading) {
     return <Loading />;

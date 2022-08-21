@@ -4,18 +4,99 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
 
 trigger:
-- main
+  batch: false
+  branches:
+    include: 
+      - main 
 
-pool:
-  vmImage: ubuntu-latest
+pr: 
+  autoCancel: false
+  drafts: true
+  branches:
+    include:
+      - main
 
-steps:
-- task: NodeTool@0
-  inputs:
-    versionSpec: '10.x'
-  displayName: 'Install Node.js'
+variables:
+  # Disable Husky in the CI environment
+  - name: 'husky'
+    value: 0
 
-- script: |
-    npm install
-    npm run build
-  displayName: 'npm install and build'
+  # NodeJS Version
+  - name: 'nodeVersion'
+    value: '18.7.0'
+
+  # NPM Version
+  - name: 'npmVersion'
+    value: '8.15.0'
+
+  # NPM Cache Directory
+  - name: 'npm_config_cache'
+    value: $(Pipeline.Workspace)/.npm
+
+  # Are we building the main branch
+  - name: 'isMain'
+    value: $[eq(variables['Build.SourceBranch'], 'refs/heads/main')]
+
+  # Azure Artifact Feed, this must align with the values in .npmrc
+  - name: artifactFeedId
+    value: '3387aaee-45af-46d2-8edc-e275fb504a12'
+
+stages: 
+  - stage: Build
+    jobs:  
+      - job: Build
+        displayName: Build
+
+        steps:
+          - checkout: self
+            clean: true
+            persistCredentials: true
+            displayName: Checkout
+
+          - task: Cache@2
+            inputs:
+              key: 'npm | "$(Agent.OS)" | package-lock.json'
+              path: $(npm_config_cache)
+            displayName: Npm Module Cache
+
+          - task: NodeTool@0
+            inputs:
+              versionSpec: $(nodeVersion)
+            displayName: Node Install $(nodeVersion)
+
+          - task: Npm@1
+            inputs:
+              command: custom
+              customCommand: 'install -g npm@$(npmVersion)'
+            displayName: Npm Install $(npmVersion)
+
+          - task: Npm@1
+            inputs:
+              command: custom
+              customCommand: 'version preminor --preid=pr.$(System.PullRequest.PullRequestNumber)+$(short_hash) --force --no-git-tag-version'
+              customRegistry: 'useFeed'
+              customFeed: $(artifactFeedId)
+            condition: and(succeeded(), ne(variables.isMain, 'true'))
+            displayName: Version Pull Request
+
+          - bash: |
+              npmVersionString=$(node -p "require('./package.json').version")
+              echo "##vso[build.updatebuildnumber]$npmVersionString"
+            workingDirectory: '$(Build.SourcesDirectory)'
+            displayName: Set Build Number
+
+
+          
+          # - task: Npm@1
+          #   inputs:
+          #     command: custom
+          #     customCommand: run test:unit
+          #     customRegistry: 'useFeed'
+          #   displayName: Unit Tests
+          
+
+          - bash: git reset --hard
+            workingDirectory: '$(Build.SourcesDirectory)'
+            displayName: Clean modified files
+
+
