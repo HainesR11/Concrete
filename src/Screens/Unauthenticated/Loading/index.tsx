@@ -28,8 +28,8 @@ const ImageContainer = styled.View`
   display: flex;
 `;
 const Logo = styled.Image`
-  width: 400;
-  height: 250;
+  width: 400px;
+  height: 250px;
 `;
 
 const SpinnerContainer = styled.View`

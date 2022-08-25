@@ -1,12 +1,14 @@
 import React from 'react';
 import styled from 'styled-components/native';
 import LinearGradient from 'react-native-linear-gradient';
-import { useRootStore } from '../../../../store';
+import { useRootStore } from '../../../../store.js';
 import { DrawerNavigationProp } from '@react-navigation/drawer';
 import { TStackNavigationParams } from '../../RootNavigation';
 import { useNavigation } from '@react-navigation/native';
 import { useState } from 'react';
+
 import Loading from '../Loading';
+import base64 from 'react-native-base64';
 
 const LoginContainer = styled.SafeAreaView`
   display: flex;
@@ -18,8 +20,8 @@ const LogoContainer = styled.View`
 `;
 
 const Logo = styled.Image`
-  width: 400;
-  height: 250;
+  width: 400px;
+  height: 250px;
 `;
 
 const InputContainer = styled.View`
@@ -72,22 +74,25 @@ const GradientContainer = styled.TouchableOpacity`
 
 type TNavigationProps = DrawerNavigationProp<TStackNavigationParams>;
 
-const styles = {
-  gradient: {
-    width: '100%',
-    height: '100%',
-    borderRadius: 5,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-};
-
 const Login = () => {
   // const onPress = () => {
   //   setIsLoading;
   // };
-  const setIsLoading = useRootStore((state) => state.setIsLoading);
+  // const setIsLoading = useRootStore(
+  //   (state: { setIsLoading: boolean }) => state.setIsLoading,
+  // );
+  const setUserToken = useRootStore((state) => state.setUserToken);
   const navigation = useNavigation<TNavigationProps>();
+  const [username, setUsername] = useState();
+  const [password, setPassword] = useState('');
+
+  const TestText = () => {
+    console.log(password);
+    const encode = encodeURI(password);
+    console.log(encode);
+    const decode = decodeURI(encode);
+    console.log(decode);
+  };
 
   return (
     <LoginContainer>
@@ -100,11 +105,18 @@ const Login = () => {
         <LoginText>Log In</LoginText>
       </LoginTextContainer>
       <InputContainer>
-        <InputField placeholder="Email Address" />
-        <InputField placeholder="Password" secureTextEntry={true} />
+        <InputField
+          placeholder="Email Address"
+          onChangeText={(e: any) => setUsername(e)}
+        />
+        <InputField
+          placeholder="Password"
+          secureTextEntry={true}
+          onChangeText={(e: any) => setPassword(e)}
+        />
       </InputContainer>
       <ButtonContainer>
-        <GradientContainer onPress={() => setIsLoading()}>
+        <GradientContainer onPress={() => TestText()}>
           <LinearGradient
             style={{
               width: '100%',
