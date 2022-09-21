@@ -32,7 +32,6 @@ const Home = () => {
     <HomeContainer>
       <DateContainer>
         <ReactNativeCalendarStrip
-          scrollable
           style={{
             height: 77,
             width: 332,

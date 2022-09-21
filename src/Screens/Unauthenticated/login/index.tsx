@@ -6,9 +6,7 @@ import { DrawerNavigationProp } from '@react-navigation/drawer';
 import { TStackNavigationParams } from '../../RootNavigation';
 import { useNavigation } from '@react-navigation/native';
 import { useState } from 'react';
-
-import Loading from '../Loading';
-import base64 from 'react-native-base64';
+import { Buffer } from 'buffer';
 
 const LoginContainer = styled.SafeAreaView`
   display: flex;
@@ -88,9 +86,9 @@ const Login = () => {
 
   const TestText = () => {
     console.log(password);
-    const encode = encodeURI(password);
+    const encode = Buffer.from(password, 'utf-8').toString('base64');
     console.log(encode);
-    const decode = decodeURI(encode);
+    const decode = Buffer.from(encode, 'base64').toString('utf8');
     console.log(decode);
   };
 
