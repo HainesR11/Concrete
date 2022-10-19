@@ -17,9 +17,10 @@ export const Tasks = [
         ProfilePicture: '123.png',
       },
     ],
-    DateCreated: '23 September 2022',
-    DateCompleted: '25 September 2022',
+    DateCreated: '18 October 2022',
+    DateCompleted: '',
     DueDate: '26 September 2022',
+    Icon: 'faHouse',
   },
   {
     TaskName: 'task 3',
@@ -40,8 +41,9 @@ export const Tasks = [
       },
     ],
     DateCreated: '23 September 2022',
-    DateCompleted: '25 September 2022',
+    DateCompleted: '',
     DueDate: '26 September 2022',
+    Icon: 'faHouse',
   },
   {
     TaskName: 'task 3',
@@ -61,9 +63,9 @@ export const Tasks = [
         ProfilePicture: '123.png',
       },
     ],
-    DateCreated: '23 September 2022',
-    DateCompleted: '25 September 2022',
-    DueDate: '26 September 2022',
+    DateCreated: '28 September 2022',
+    DateCompleted: '',
+    DueDate: '31 September 2022',
   },
   {
     TaskName: 'task 4',
@@ -83,9 +85,9 @@ export const Tasks = [
         ProfilePicture: '123.png',
       },
     ],
-    DateCreated: '23 September 2022',
-    DateCompleted: '25 September 2022',
-    DueDate: '26 September 2022',
+    DateCreated: '28 September 2022',
+    DateCompleted: '',
+    DueDate: '31 September 2022',
   },
   {
     TaskName: 'task 5',
@@ -108,6 +110,7 @@ export const Tasks = [
     DateCreated: '23 September 2022',
     DateCompleted: '25 September 2022',
     DueDate: '26 September 2022',
+    Icon: 'faHouse',
   },
   {
     TaskName: 'task 6',
@@ -130,6 +133,7 @@ export const Tasks = [
     DateCreated: '23 September 2022',
     DateCompleted: '25 September 2022',
     DueDate: '26 September 2022',
+    Icon: 'faHouse',
   },
   {
     TaskName: 'task 7',
@@ -152,6 +156,7 @@ export const Tasks = [
     DateCreated: '23 September 2022',
     DateCompleted: '25 September 2022',
     DueDate: '26 September 2022',
+    Icon: 'faHouse',
   },
   {
     TaskName: 'task 8',
@@ -174,6 +179,7 @@ export const Tasks = [
     DateCreated: '23 September 2022',
     DateCompleted: '25 September 2022',
     DueDate: '26 September 2022',
+    Icon: 'faHouse',
   },
   {
     TaskName: 'task 9',
@@ -196,6 +202,7 @@ export const Tasks = [
     DateCreated: '23 September 2022',
     DateCompleted: '25 September 2022',
     DueDate: '26 September 2022',
+    Icon: 'faHouse',
   },
   {
     TaskName: 'task 10',
@@ -218,5 +225,6 @@ export const Tasks = [
     DateCreated: '23 September 2022',
     DateCompleted: '25 September 2022',
     DueDate: '26 September 2022',
+    Icon: 'faHouse',
   },
 ];
