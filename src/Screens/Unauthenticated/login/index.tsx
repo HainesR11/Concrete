@@ -114,7 +114,7 @@ const Login = () => {
         />
       </InputContainer>
       <ButtonContainer>
-        <GradientContainer onPress={() => TestText()}>
+        <GradientContainer onPress={() => setUserToken()}>
           <LinearGradient
             style={{
               width: '100%',

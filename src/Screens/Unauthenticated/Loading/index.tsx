@@ -4,24 +4,6 @@ import { Animated, Easing } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import styled from 'styled-components/native';
 
-// const spinnerAnimation = new Keyframe({
-//   0: {
-//     rotation: 0,
-//   },
-//   25: {
-//     rotation: 90,
-//   },
-//   50: {
-//     rotation: 180,
-//   },
-//   75: {
-//     rotation: 270,
-//   },
-//   100: {
-//     rotation: 360,
-//   },
-// });
-
 const LoadingContainer = styled.SafeAreaView``;
 
 const ImageContainer = styled.View`
@@ -74,6 +56,15 @@ const Loading = () => {
     startAnimation();
   });
 
+  const gradientStyle = () => {
+    return {
+      width: 200,
+      height: 200,
+      borderRadius: 100,
+      padding: 5,
+    };
+  };
+
   return (
     <LoadingContainer>
       <ImageContainer>
@@ -98,12 +89,7 @@ const Loading = () => {
           <LinearGradient
             start={{ x: 1.0, y: 0.0 }}
             end={{ x: 1.0, y: 1.0 }}
-            style={{
-              width: 200,
-              height: 200,
-              borderRadius: 100,
-              padding: 5,
-            }}
+            style={gradientStyle()}
             colors={['#04b4ff', '#0500ff', '#b400ff', '#ff00d6']}>
             <GradientBackground />
           </LinearGradient>
