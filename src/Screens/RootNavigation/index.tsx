@@ -2,22 +2,20 @@ import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Login from '../Unauthenticated/login';
-import Home from '../Authenticated/Home';
 import { useRootStore } from '../../../store';
 import Loading from '../Unauthenticated/Loading';
 import CreateAccount from '../Unauthenticated/CreateAccount';
-import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import Projects from '../../Screens/Authenticated/Projects';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import {
-  faHouseChimney,
-  faLayerGroup,
-  faListCheck,
-  faPlus,
-  faUserGroup,
-} from '@fortawesome/free-solid-svg-icons';
-import CustomTabButton from '../../components/CustomTabButton';
-import Drawer from '@react-navigation/drawer'
+import CustomTabButton from '../../components/Navigation/CustomTabButton';
+import CustomHeader from '../../components/Navigation/Header';
+import Header from '../../components/Navigation/Header';
+import Home from '../Authenticated/Home';
+import Projects from '../Authenticated/Projects';
+import Profile from '../Authenticated/Profile';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import SideMenu from '../../components/Navigation/sideMenu';
+
+import 'react-native-gesture-handler';
+import 'react-native-reanimated';
 
 export type TStackNavigationParams = {
   Login: undefined;
@@ -30,20 +28,18 @@ export type TAuthedStackNavigationParams = {
   Tasks: undefined;
   Projects: undefined;
   Friends: undefined;
+  Profile: undefined;
+  Add: undefined;
 };
 
 const Stack = createStackNavigator<TStackNavigationParams>();
-
-// const Header = ({ navigation }: any) => {
-//   <HeaderContiner>
-//     <FontAwesomeIcon icon={faBars} />
-//   </HeaderContiner>;
-// };
+const AuthDrawer = createDrawerNavigator<TAuthedStackNavigationParams>();
 
 const RootNavigation = () => {
   const userTokenValue = useRootStore(
     (state: { userToken: boolean }) => state.userToken,
   );
+  // const userTokenValue = true;
   const isLoading = useRootStore(
     (state: { isLoading: boolean }) => state.isLoading,
   );
@@ -52,106 +48,28 @@ const RootNavigation = () => {
     return <Loading />;
   }
 
-  const Tab = createBottomTabNavigator();
-
-  return (
+  return userTokenValue ? (
     <NavigationContainer>
-      {userTokenValue ? (
-        <Tab.Navigator
-          screenOptions={{
-            tabBarShowLabel: false,
-            headerShown: false,
-            tabBarStyle: {
-              backgroundColor: 'white',
-              position: 'absolute',
-              bottom: 25,
-              left: 20,
-              right: 20,
-              elevation: 0,
-              borderRadius: 15,
-              height: 50,
-              shadowColor: '#7d7d7d4d',
-              shadowOpacity: 3,
-              shadowOffset: { width: 5, height: 7 },
-            },
-          }}
-          initialRouteName="Home">
-          <Tab.Screen
-            name="Tasks"
-            component={Home}
-            options={{
-              tabBarIconStyle: {
-                marginTop: 40,
-              },
-              tabBarIcon: () => {
-                return <FontAwesomeIcon size={25} icon={faListCheck} />;
-              },
-            }}
-          />
-          <Tab.Screen
-            name="Home"
-            component={Home}
-            options={{
-              tabBarIconStyle: {
-                marginTop: 40,
-              },
-              tabBarIcon: () => {
-                return <FontAwesomeIcon size={25} icon={faHouseChimney} />;
-              },
-            }}
-          />
-          <Tab.Screen
-            name="Add"
-            component={Home}
-            options={{
-              tabBarIcon: () => {
-                return <FontAwesomeIcon color="white" icon={faPlus} />;
-              },
-              tabBarButton: (props) => {
-                return (
-                  <CustomTabButton
-                    children={props.children}
-                    onPress={() => {}}
-                  />
-                );
-              },
-            }}
-          />
-          <Tab.Screen
-            name="Friends"
-            component={Home}
-            options={{
-              tabBarIconStyle: {
-                marginTop: 40,
-              },
-              tabBarIcon: () => {
-                return <FontAwesomeIcon size={25} icon={faUserGroup} />;
-              },
-            }}
-          />
-          <Tab.Screen
-            name="Projects"
-            component={Projects}
-            options={{
-              tabBarIconStyle: {
-                marginTop: 40,
-              },
-              tabBarIcon: () => {
-                return <FontAwesomeIcon size={25} icon={faLayerGroup} />;
-              },
-            }}
-          />
-        </Tab.Navigator>
-      ) : (
-        <Stack.Navigator
-          initialRouteName="Login"
-          screenOptions={{
-            headerShown: false,
-          }}>
-          <Stack.Screen name="Login" component={Login} />
-          <Stack.Screen name="CreateAccount" component={CreateAccount} />
-        </Stack.Navigator>
-      )}
+      <AuthDrawer.Navigator
+        screenOptions={{
+          header: ({ navigation }) => <CustomHeader navigation={navigation} />,
+        }}
+        initialRouteName="Home"
+        drawerContent={() => <SideMenu />}>
+        <AuthDrawer.Screen name="Home" component={CustomTabButton} />
+        <AuthDrawer.Screen name="Profile" component={Profile} />
+      </AuthDrawer.Navigator>
+    </NavigationContainer>
+  ) : (
+    <NavigationContainer>
+      <Stack.Navigator
+        initialRouteName="Login"
+        screenOptions={{
+          headerShown: false,
+        }}>
+        <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen name="CreateAccount" component={CreateAccount} />
+      </Stack.Navigator>
     </NavigationContainer>
   );
 };

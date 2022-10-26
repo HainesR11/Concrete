@@ -13,7 +13,7 @@ const ButtonPress = styled.TouchableOpacity`
   box-shadow: 5px 7px 3px #7d7d7d4d;
 `;
 
-const CustomTabButton = ({ children, onPress }) => {
+const PlusButton = ({ children, onPress }) => {
   return (
     <ButtonPress onPress={onPress}>
       <LinearGradient
@@ -33,4 +33,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default CustomTabButton;
+export default PlusButton;
