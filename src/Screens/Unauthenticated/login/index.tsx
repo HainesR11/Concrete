@@ -49,6 +49,8 @@ const LoginText = styled.Text`
 const LoginButton = styled.Text`
   text-decoration: none;
   color: white;
+  text-align: center;
+  padding: 16px 0px;
 `;
 
 const ButtonContainer = styled.View`
@@ -70,7 +72,18 @@ const GradientContainer = styled.TouchableOpacity`
   height: 20%;
 `;
 
+const ValidatorText = styled.Text`
+  color: red;
+  margin-bottom: 10px;
+`;
+
 type TNavigationProps = DrawerNavigationProp<TStackNavigationParams>;
+
+const gradientStyles = {
+  width: '100%',
+  height: '100%',
+  borderRadius: 5,
+};
 
 const Login = () => {
   // const onPress = () => {
@@ -81,15 +94,28 @@ const Login = () => {
   // );
   const setUserToken = useRootStore((state) => state.setUserToken);
   const navigation = useNavigation<TNavigationProps>();
-  const [username, setUsername] = useState();
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [emailValidorText, setEmailValidorText] = useState('');
 
   const TestText = () => {
+    // Testing encoding - will later impement into onLogin Function
     console.log(password);
     const encode = Buffer.from(password, 'utf-8').toString('base64');
     console.log(encode);
     const decode = Buffer.from(encode, 'base64').toString('utf8');
     console.log(decode);
+  };
+
+  const emailValidator = () => {
+    // TODO: Find Suitable Validator - Potentionaly react-native-form-validator
+    let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
+    if (reg.test(email) === false) {
+      setEmailValidorText('Please enter a valid Email Address ');
+    } else {
+      setEmailValidorText('');
+      setUserToken();
+    }
   };
 
   return (
@@ -103,9 +129,10 @@ const Login = () => {
         <LoginText>Log In</LoginText>
       </LoginTextContainer>
       <InputContainer>
+        {emailValidorText && <ValidatorText>{emailValidorText}</ValidatorText>}
         <InputField
           placeholder="Email Address"
-          onChangeText={(e: any) => setUsername(e)}
+          onChangeText={(e: any) => setEmail(e)}
         />
         <InputField
           placeholder="Password"
@@ -114,15 +141,9 @@ const Login = () => {
         />
       </InputContainer>
       <ButtonContainer>
-        <GradientContainer onPress={() => setUserToken()}>
+        <GradientContainer onPress={() => emailValidator()}>
           <LinearGradient
-            style={{
-              width: '100%',
-              height: '100%',
-              borderRadius: 5,
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}
+            style={[gradientStyles]}
             colors={['#04b4ff', '#0500ff', '#b400ff', '#ff00d6']}>
             <LoginButton>Log in</LoginButton>
           </LinearGradient>

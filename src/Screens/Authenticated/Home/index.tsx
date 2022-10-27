@@ -5,11 +5,8 @@ import { useEffect } from 'react';
 import moment from 'moment';
 import { Projects } from '../../../__mocks__/ProjectMocks';
 import ProjectView from '../../../components/ProjectView';
-import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faSearch, faUser } from '@fortawesome/free-solid-svg-icons';
 import { Tasks } from '../../../__mocks__/TaskMocks';
 import TaskView from '../../../components/Tasks/index';
-import { useRootStore } from '../../../../store';
 
 const HomeContainer = styled.SafeAreaView`
   display: flex;
@@ -22,7 +19,7 @@ const Title = styled.Text`
   color: black;
   font-weight: bold;
   text-align: center;
-  margin: 20px 0px;
+  margin: 15px 0px;
 `;
 const ProjectContainer = styled.View`
   display: flex;
@@ -33,18 +30,17 @@ const ProjectContainer = styled.View`
 
 const TaskContainer = styled.View`
   display: flex;
-  height: 225px;
+  height: 285px;
   flex-direction: column;
   alignitems: space-around;
+  padding-top: 10px;
 `;
 
 const ViewContainer = styled.ScrollView`
   padding: -10px 0px;
 `;
 
-const DateContainer = styled.View`
-  margin: 20px 0;
-`;
+const DateContainer = styled.View``;
 
 const calendarStrip = {
   height: 77,
@@ -54,29 +50,8 @@ const calendarStrip = {
   borderRadius: 15,
 };
 
-const Logo = styled.Image`
-  width: 300px;
-  height: 50px;
-  margin: 10px 0px;
-  flex: 3;
-`;
-
-const LogoContainer = styled.View`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  align-items: center;
-  margin: 0px 10px;
-`;
-
-const FontAwesomeLogo = styled(FontAwesomeIcon)`
-  flex: 1;
-`;
-const TouchOpacicity = styled.TouchableOpacity``;
-
 const Home = () => {
   const [date, setDate] = useState(new Date());
-  const setUserToken = useRootStore((state) => state.setIsLoading);
   const limit = 5;
 
   useEffect(() => {
@@ -89,15 +64,6 @@ const Home = () => {
 
   return (
     <HomeContainer>
-      <LogoContainer>
-        <TouchOpacicity onPress={() => setUserToken}>
-          <FontAwesomeLogo icon={faUser} size={20} />
-        </TouchOpacicity>
-        <Logo
-          source={require('../../../assets/images/Concrete-logos_black.png')}
-        />
-        <FontAwesomeLogo icon={faSearch} size={20} />
-      </LogoContainer>
       <DateContainer>
         <ReactNativeCalendarStrip
           style={calendarStrip}

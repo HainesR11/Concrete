@@ -17,13 +17,13 @@ export const Tasks = [
         ProfilePicture: '123.png',
       },
     ],
-    DateCreated: '18 October 2022',
+    DateCreated: '20 October 2022',
     DateCompleted: '',
     DueDate: '26 September 2022',
     Icon: 'faHouse',
   },
   {
-    TaskName: 'task 3',
+    TaskName: 'task 2',
     Project: 'project 1',
     CreatedBy: 'Rhys Haines',
     Involved: [
