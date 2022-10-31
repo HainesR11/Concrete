@@ -88,7 +88,7 @@ stages:
           - task: Npm@1
             inputs:
               command: custom
-              customCommand: run lint:ts
+              customCommand: npm run lint:ts
             displayName: Lint TypeScript
           
           # - task: Npm@1
