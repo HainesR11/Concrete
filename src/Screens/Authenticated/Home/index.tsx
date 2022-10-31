@@ -1,13 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components/native';
 import ReactNativeCalendarStrip from 'react-native-calendar-strip';
-import { useEffect } from 'react';
 import moment from 'moment';
 import { Projects } from '../../../__mocks__/ProjectMocks';
 import ProjectView from '../../../components/ProjectView';
 import { Tasks } from '../../../__mocks__/TaskMocks';
 import TaskView from '../../../components/Tasks/index';
-
+import CustomTabButton from '../../../components/Navigation/CustomTabButton';
 const HomeContainer = styled.SafeAreaView`
   display: flex;
   flex-direction: column;
@@ -51,12 +50,7 @@ const calendarStrip = {
 };
 
 const Home = () => {
-  const [date, setDate] = useState(new Date());
   const limit = 5;
-
-  useEffect(() => {
-    setDate(new Date());
-  }, []);
 
   const colorReturn = () => {
     return { color: 'white' };
@@ -71,26 +65,27 @@ const Home = () => {
           calendarHeaderStyle={colorReturn()}
           dateNumberStyle={colorReturn()}
           dateNameStyle={colorReturn()}
-          selectedDate={date}
+          selectedDate={moment().toDate()}
           startingDate={moment().subtract(3, 'days').toDate()}
         />
       </DateContainer>
       <ProjectContainer>
         <Title>My Projects</Title>
         <ViewContainer horizontal={true}>
-          {Projects.map((project) => {
-            return <ProjectView project={project} />;
+          {Projects.map((project, key) => {
+            return <ProjectView key={key} project={project} />;
           })}
         </ViewContainer>
       </ProjectContainer>
       <TaskContainer>
         <Title>My Tasks</Title>
         <ViewContainer>
-          {Tasks.slice(0, limit ? limit : Tasks.length).map((Task) => {
-            return <TaskView task={Task} />;
+          {Tasks.slice(0, limit ? limit : Tasks.length).map((Task, key) => {
+            return <TaskView key={key} task={Task} />;
           })}
         </ViewContainer>
       </TaskContainer>
+      <CustomTabButton />
     </HomeContainer>
   );
 };
