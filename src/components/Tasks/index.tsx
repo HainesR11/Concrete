@@ -66,7 +66,6 @@ const TaskView = ({ task }) => {
     const date = moment(DateCreated).format('DD MMMM yyyy');
     setIsNew(moment(date).isSameOrAfter(moment(Date()).format('DD MMMM yyyy')));
     setIsCompleted(DateCompleted ? true : false);
-    console.log(isCompleted);
   }, [DateCreated, DateCompleted, isCompleted]);
 
   return (

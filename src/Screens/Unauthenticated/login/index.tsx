@@ -6,7 +6,7 @@ import { DrawerNavigationProp } from '@react-navigation/drawer';
 import { TStackNavigationParams } from '../../RootNavigation';
 import { useNavigation } from '@react-navigation/native';
 import { useState } from 'react';
-import { Buffer } from 'buffer';
+// import { Buffer } from 'buffer';
 
 const LoginContainer = styled.SafeAreaView`
   display: flex;
@@ -95,17 +95,17 @@ const Login = () => {
   const setUserToken = useRootStore((state) => state.setUserToken);
   const navigation = useNavigation<TNavigationProps>();
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  // const [password, setPassword] = useState('');
   const [emailValidorText, setEmailValidorText] = useState('');
 
-  const TestText = () => {
-    // Testing encoding - will later impement into onLogin Function
-    console.log(password);
-    const encode = Buffer.from(password, 'utf-8').toString('base64');
-    console.log(encode);
-    const decode = Buffer.from(encode, 'base64').toString('utf8');
-    console.log(decode);
-  };
+  // const TestText = () => {
+  //   // Testing encoding - will later impement into onLogin Function
+  //   console.log(password);
+  //   const encode = Buffer.from(password, 'utf-8').toString('base64');
+  //   console.log(encode);
+  //   const decode = Buffer.from(encode, 'base64').toString('utf8');
+  //   console.log(decode);
+  // };
 
   const emailValidator = () => {
     // TODO: Find Suitable Validator - Potentionaly react-native-form-validator
@@ -135,9 +135,9 @@ const Login = () => {
           onChangeText={(e: any) => setEmail(e)}
         />
         <InputField
+          passwordRules={'heloo there'}
           placeholder="Password"
-          secureTextEntry={true}
-          onChangeText={(e: any) => setPassword(e)}
+          // onChangeText={(e: any) => setPassword(e)}
         />
       </InputContainer>
       <ButtonContainer>

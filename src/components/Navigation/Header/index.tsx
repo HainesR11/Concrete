@@ -38,5 +38,4 @@ const CustomHeader = ({ navigation }) => {
     </LogoContainer>
   );
 };
-
 export default CustomHeader;

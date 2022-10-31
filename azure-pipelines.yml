@@ -84,8 +84,6 @@ stages:
               echo "##vso[build.updatebuildnumber]$npmVersionString"
             workingDirectory: '$(Build.SourcesDirectory)'
             displayName: Set Build Number
-
-
           
           # - task: Npm@1
           #   inputs:
