@@ -99,6 +99,9 @@ const Icon = styled(FontAwesomeIcon)``;
 const SideMenu = ({ navigation }) => {
   const setUserToken = useRootStore((state) => state.setUserToken);
   const route = navigation.getState().routes;
+  const newRoutes = route.filter(
+    (routeName: any) => routeName.name !== 'Profile',
+  );
   const navState = useRootStore((state) => state.navRef);
 
   // const route = '';
@@ -119,7 +122,9 @@ const SideMenu = ({ navigation }) => {
         </TextContainer>
       </ProfileView>
       <ButtonContainer>
-        {route.map((key: { name: string; key: string }, name: number) => {
+        {newRoutes.map((key: { name: string; key: string }, name: number) => {
+          console.log(key.name);
+          console.log(key.key);
           return (
             <SideMenuButton
               title={key.name}
@@ -127,8 +132,8 @@ const SideMenu = ({ navigation }) => {
               navKey={key.key}
               route={navState}
               navigation={navigation}
-              width={width / 5}
-              height={height / 25}
+              width={width / 2}
+              height={height / 20}
             />
           );
         })}

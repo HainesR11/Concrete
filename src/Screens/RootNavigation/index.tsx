@@ -34,6 +34,7 @@ export type TAuthedStackNavigationParams = {
   Friends: undefined;
   Profile: undefined;
   Add: undefined;
+  Calendar: undefined;
 };
 
 const Stack = createStackNavigator<TStackNavigationParams>();
@@ -73,10 +74,19 @@ const RootNavigation = () => {
           )}>
           {/* TODO: change home to caleneder */}
           <AuthDrawer.Screen name="Home" component={Home} />
-          <AuthDrawer.Screen name="Profile" component={Profile} />
+          <AuthDrawer.Group>
+            <AuthDrawer.Screen
+              options={{
+                drawerItemStyle: { display: 'none' },
+              }}
+              name="Profile"
+              component={Profile}
+            />
+          </AuthDrawer.Group>
           <AuthDrawer.Screen name="Projects" component={Projects} />
           <AuthDrawer.Screen name="Tasks" component={Home} />
           <AuthDrawer.Screen name="Friends" component={Friends} />
+          <AuthDrawer.Screen name="Calendar" component={Friends} />
         </AuthDrawer.Navigator>
       ) : (
         <Stack.Navigator

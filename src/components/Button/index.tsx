@@ -25,21 +25,27 @@ type TSideMenuProps = {
   navigation: any;
 };
 
-const SideButtonTitleText = styled.Text`
+type TTextProps = {
+  selected: string;
+};
+
+const SideButtonTitleText = styled.Text<TTextProps>`
   font-size: 17px;
   font-weight: 700;
+  color: ${(state) => (state.selected ? 'white' : 'black')};
   text-align: center;
 `;
 
 const ButtonContainer = styled.TouchableOpacity<TContainerProps>`
-  width: ${(state) => state.width};
-  height: ${(state) => state.height};
+  width: ${(state) => state.width}px;
+  height: ${(state) => state.height}px;
   background-color: ${(state) =>
     state.selected ? state.color : 'transparent'};
   border-radius: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: ease-in-out 1s;
 `;
 
 export const SideMenuButton = ({
@@ -62,7 +68,7 @@ export const SideMenuButton = ({
       width={width}
       height={height}
       onPress={() => navigation.navigate(title)}>
-      <SideButtonTitleText>{title}</SideButtonTitleText>
+      <SideButtonTitleText selected={selected}>{title}</SideButtonTitleText>
     </ButtonContainer>
   );
 };

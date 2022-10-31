@@ -2,6 +2,7 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import styled from 'styled-components/native';
 import {
+  faCalendarDay,
   faHouseChimney,
   faLayerGroup,
   faListCheck,
@@ -47,8 +48,8 @@ const CustomTabButton = () => {
       <TouchOpacicity onPress={() => navigation.navigate('Projects')}>
         <Icon size={width / 15} icon={faListCheck} />
       </TouchOpacicity>
-      <TouchOpacicity onPress={() => navigation.navigate('Home')}>
-        <Icon size={width / 15} icon={faHouseChimney} />
+      <TouchOpacicity onPress={() => navigation.navigate('Calendar')}>
+        <Icon size={width / 15} icon={faCalendarDay} />
       </TouchOpacicity>
       <PlusButton
         children={
