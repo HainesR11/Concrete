@@ -85,11 +85,9 @@ stages:
             workingDirectory: '$(Build.SourcesDirectory)'
             displayName: Set Build Number
 
-          - task: Npm@1
-            inputs:
-              command: custom
-              customCommand: npm run lint:ts
-            displayName: Lint TypeScript
+          - script: |
+              npm run lint:ts
+            displayName: Lint Typescript
           
           # - task: Npm@1
           #   inputs:
