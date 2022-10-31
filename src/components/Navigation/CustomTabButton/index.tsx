@@ -1,8 +1,6 @@
 import React from 'react';
-import Home from '../../../Screens/Authenticated/Home';
-import Projects from '../../../Screens/Authenticated/Projects';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import styled from 'styled-components/native';
 import {
   faHouseChimney,
   faLayerGroup,
@@ -12,91 +10,61 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { TAuthedStackNavigationParams } from '../../../Screens/RootNavigation';
 import PlusButton from '../PlusButton';
+import { Dimensions } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
+
+const { width, height } = Dimensions.get('screen');
+
+const TabContainer = styled.View`
+  width: ${width - 40}px;
+  border-radius: 20px;
+  height: ${height / 14}px;
+  margin-bottom: 10px;
+  display: flex;
+  background-color: #f5f5f5;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  box-shadow: 5px 7px 3px #7d7d7d4d;
+`;
+
+const PlusContainer = styled.View`
+  height: 90%;
+  justify-content: center;
+  align-items: center;
+`;
+
+const Icon = styled(FontAwesomeIcon)``;
+
+const TouchOpacicity = styled.TouchableOpacity``;
 
 const CustomTabButton = () => {
-  const Tab = createBottomTabNavigator<TAuthedStackNavigationParams>();
-
+  const navigation =
+    useNavigation<StackNavigationProp<TAuthedStackNavigationParams>>();
   return (
-    <Tab.Navigator
-      screenOptions={{
-        headerShown: false,
-        tabBarShowLabel: false,
-        tabBarStyle: {
-          backgroundColor: 'white',
-          position: 'absolute',
-          bottom: 25,
-          left: 20,
-          right: 20,
-          elevation: 0,
-          borderRadius: 15,
-          height: 50,
-          shadowColor: '#7d7d7d4d',
-          shadowOpacity: 3,
-          shadowOffset: { width: 5, height: 7 },
-        },
-      }}
-      initialRouteName="Home">
-      <Tab.Screen
-        name="Tasks"
-        component={Home}
-        options={{
-          tabBarIconStyle: {
-            marginTop: 40,
-          },
-          tabBarIcon: () => {
-            return <FontAwesomeIcon size={25} icon={faListCheck} />;
-          },
-        }}
+    <TabContainer>
+      <TouchOpacicity onPress={() => navigation.navigate('Projects')}>
+        <Icon size={width / 15} icon={faListCheck} />
+      </TouchOpacicity>
+      <TouchOpacicity onPress={() => navigation.navigate('Home')}>
+        <Icon size={width / 15} icon={faHouseChimney} />
+      </TouchOpacicity>
+      <PlusButton
+        children={
+          <PlusContainer>
+            <Icon size={width / 14} color="white" icon={faPlus} />
+          </PlusContainer>
+        }
+        onPress={() => {}}
       />
-      <Tab.Screen
-        name="Home"
-        component={Home}
-        options={{
-          tabBarIconStyle: {
-            marginTop: 40,
-          },
-          tabBarIcon: () => {
-            return <FontAwesomeIcon size={25} icon={faHouseChimney} />;
-          },
-        }}
-      />
-      <Tab.Screen
-        name="Add"
-        component={Home}
-        options={{
-          tabBarIcon: () => {
-            return <FontAwesomeIcon color="white" icon={faPlus} />;
-          },
-          tabBarButton: (props) => {
-            return <PlusButton children={props.children} onPress={() => {}} />;
-          },
-        }}
-      />
-      <Tab.Screen
-        name="Friends"
-        component={Home}
-        options={{
-          tabBarIconStyle: {
-            marginTop: 40,
-          },
-          tabBarIcon: () => {
-            return <FontAwesomeIcon size={25} icon={faUserGroup} />;
-          },
-        }}
-      />
-      <Tab.Screen
-        name="Projects"
-        component={Projects}
-        options={{
-          tabBarIconStyle: {
-            marginTop: 40,
-          },
-          tabBarIcon: () => {
-            return <FontAwesomeIcon size={25} icon={faLayerGroup} />;
-          },
-        }}
-      />
-    </Tab.Navigator>
+      <TouchOpacicity onPress={() => navigation.navigate('Friends')}>
+        <Icon size={width / 15} icon={faUserGroup} />
+      </TouchOpacicity>
+      <TouchOpacicity onPress={() => navigation.navigate('Projects')}>
+        <Icon size={width / 15} icon={faLayerGroup} />
+      </TouchOpacicity>
+    </TabContainer>
   );
 };
 

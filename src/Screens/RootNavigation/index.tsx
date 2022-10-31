@@ -1,21 +1,25 @@
-import * as React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
+import React from 'react';
+import {
+  createNavigationContainerRef,
+  NavigationContainer,
+} from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import Login from '../Unauthenticated/login';
 import { useRootStore } from '../../../store';
-import Loading from '../Unauthenticated/Loading';
-import CreateAccount from '../Unauthenticated/CreateAccount';
-import CustomTabButton from '../../components/Navigation/CustomTabButton';
 import CustomHeader from '../../components/Navigation/Header';
-import Header from '../../components/Navigation/Header';
-import Home from '../Authenticated/Home';
-import Projects from '../Authenticated/Projects';
-import Profile from '../Authenticated/Profile';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import SideMenu from '../../components/Navigation/sideMenu';
+import { DefaultTheme } from '@react-navigation/native';
 
 import 'react-native-gesture-handler';
 import 'react-native-reanimated';
+
+import Projects from '../Authenticated/Projects';
+import Friends from '../Authenticated/Friends';
+import Home from '../Authenticated/Home';
+import Profile from '../Authenticated/Profile';
+import Loading from '../Unauthenticated/Loading';
+import CreateAccount from '../Unauthenticated/CreateAccount';
+import Login from '../Unauthenticated/login';
 
 export type TStackNavigationParams = {
   Login: undefined;
@@ -36,40 +40,54 @@ const Stack = createStackNavigator<TStackNavigationParams>();
 const AuthDrawer = createDrawerNavigator<TAuthedStackNavigationParams>();
 
 const RootNavigation = () => {
-  const userTokenValue = useRootStore(
-    (state: { userToken: boolean }) => state.userToken,
-  );
+  const theme = DefaultTheme;
+  theme.colors.background = '#e7e6e6';
+
+  const { userToken, isLoading, setNavRef } = useRootStore((state) => state);
   // const userTokenValue = true;
-  const isLoading = useRootStore(
-    (state: { isLoading: boolean }) => state.isLoading,
-  );
+
+  const navRef = createNavigationContainerRef();
 
   if (isLoading) {
     return <Loading />;
   }
-
-  return userTokenValue ? (
-    <NavigationContainer>
-      <AuthDrawer.Navigator
-        screenOptions={{
-          header: ({ navigation }) => <CustomHeader navigation={navigation} />,
-        }}
-        initialRouteName="Home"
-        drawerContent={() => <SideMenu />}>
-        <AuthDrawer.Screen name="Home" component={CustomTabButton} />
-        <AuthDrawer.Screen name="Profile" component={Profile} />
-      </AuthDrawer.Navigator>
-    </NavigationContainer>
-  ) : (
-    <NavigationContainer>
-      <Stack.Navigator
-        initialRouteName="Login"
-        screenOptions={{
-          headerShown: false,
-        }}>
-        <Stack.Screen name="Login" component={Login} />
-        <Stack.Screen name="CreateAccount" component={CreateAccount} />
-      </Stack.Navigator>
+  return (
+    <NavigationContainer
+      theme={theme}
+      ref={navRef}
+      onReady={() => setNavRef(navRef.getCurrentRoute()?.key)}
+      onStateChange={() => setNavRef(navRef.getCurrentRoute()?.key)}>
+      {userToken ? (
+        <AuthDrawer.Navigator
+          screenOptions={{
+            gestureHandlerProps: {
+              enabled: true,
+            },
+            header: ({ navigation }) => (
+              <CustomHeader navigation={navigation} />
+            ),
+          }}
+          initialRouteName="Home"
+          drawerContent={({ navigation }) => (
+            <SideMenu navigation={navigation} />
+          )}>
+          {/* TODO: change home to caleneder */}
+          <AuthDrawer.Screen name="Home" component={Home} />
+          <AuthDrawer.Screen name="Profile" component={Profile} />
+          <AuthDrawer.Screen name="Projects" component={Projects} />
+          <AuthDrawer.Screen name="Tasks" component={Home} />
+          <AuthDrawer.Screen name="Friends" component={Friends} />
+        </AuthDrawer.Navigator>
+      ) : (
+        <Stack.Navigator
+          initialRouteName="Login"
+          screenOptions={{
+            headerShown: false,
+          }}>
+          <Stack.Screen name="Login" component={Login} />
+          <Stack.Screen name="CreateAccount" component={CreateAccount} />
+        </Stack.Navigator>
+      )}
     </NavigationContainer>
   );
 };

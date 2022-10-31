@@ -5,8 +5,6 @@ import styled from 'styled-components/native';
 
 const ButtonPress = styled.TouchableOpacity`
   top: -20px;
-  justify-content: center;
-  align-items: center;
   width: 50px;
   height: 50px;
   border-radius: 35px;
