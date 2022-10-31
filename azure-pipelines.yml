@@ -84,10 +84,6 @@ stages:
               echo "##vso[build.updatebuildnumber]$npmVersionString"
             workingDirectory: '$(Build.SourcesDirectory)'
             displayName: Set Build Number
-
-          - script: |
-              npm run lint:ts
-            displayName: Lint Typescript
           
           # - task: Npm@1
           #   inputs:
