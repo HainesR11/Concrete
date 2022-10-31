@@ -44,7 +44,6 @@ const IconContainer = styled.View`
 
 const ProjectView = ({ project }) => {
   const { Name, DateUpdated } = project;
-  console.log(Name);
   return (
     <ProjectContainer>
       <IconContainer>

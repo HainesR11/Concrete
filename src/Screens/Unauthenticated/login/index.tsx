@@ -98,14 +98,14 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [emailValidorText, setEmailValidorText] = useState('');
 
-  const TestText = () => {
-    // Testing encoding - will later impement into onLogin Function
-    console.log(password);
-    const encode = Buffer.from(password, 'utf-8').toString('base64');
-    console.log(encode);
-    const decode = Buffer.from(encode, 'base64').toString('utf8');
-    console.log(decode);
-  };
+  // const TestText = () => {
+  //   // Testing encoding - will later impement into onLogin Function
+  //   console.log(password);
+  //   const encode = Buffer.from(password, 'utf-8').toString('base64');
+  //   console.log(encode);
+  //   const decode = Buffer.from(encode, 'base64').toString('utf8');
+  //   console.log(decode);
+  // };
 
   const emailValidator = () => {
     // TODO: Find Suitable Validator - Potentionaly react-native-form-validator
@@ -135,8 +135,8 @@ const Login = () => {
           onChangeText={(e: any) => setEmail(e)}
         />
         <InputField
+          passwordRules={'heloo there'}
           placeholder="Password"
-          secureTextEntry={true}
           onChangeText={(e: any) => setPassword(e)}
         />
       </InputContainer>
