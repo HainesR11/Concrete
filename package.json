@@ -27,6 +27,7 @@
     "@types/react-native": "^0.69.3",
     "@types/styled-components": "^5.1.25",
     "@types/typescript": "^2.0.0",
+    "@typescript-eslint/typescript-estree": "^5.41.0",
     "buffer": "^6.0.3",
     "jest-junit": "^14.0.0",
     "latest": "^0.2.0",

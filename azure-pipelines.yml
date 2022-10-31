@@ -90,7 +90,6 @@ stages:
               command: custom
               customCommand: run lint:ts
               customRegistry: 'useFeed'
-              customFeed: $(artifactFeedId)
             displayName: Lint TypeScript
           
           # - task: Npm@1

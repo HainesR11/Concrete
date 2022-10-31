@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components/native';
-import { Dimensions } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import { useRootStore } from '../../../../store.js';
 import { useNavigation } from '@react-navigation/native';
 import { TStackNavigationParams } from '../../RootNavigation';
+import { DrawerNavigationProp } from '@react-navigation/drawer';
 
 type TTextInputProps = {
   width: number;
@@ -12,8 +12,6 @@ type TTextInputProps = {
 };
 
 type TNavigationProps = DrawerNavigationProp<TStackNavigationParams>;
-
-const windowWidth = Dimensions.get('window').width;
 
 const CreateContrainer = styled.SafeAreaView`
   display: flex;
@@ -70,6 +68,8 @@ const ButtonContainer = styled.View`
 const GradientContainer = styled.TouchableOpacity`
   width: 60%;
   height: 20%;
+  align-items: center,
+  justifyContent: center,
 `;
 const LoginButton = styled.Text`
   text-decoration: none;
@@ -85,8 +85,6 @@ const stylesGradient = {
   width: '100%',
   height: '100%',
   borderRadius: 5,
-  alignItems: 'center',
-  justifyContent: 'center',
 };
 
 const CreateAccount = () => {

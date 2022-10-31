@@ -1,3 +1,1 @@
-export const People = [{
-    
-}]
+export const People = [{}];
