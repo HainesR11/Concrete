@@ -5,8 +5,8 @@ import styled from 'styled-components/native';
 
 const ButtonPress = styled.TouchableOpacity`
   top: -20px;
-  width: 50px;
-  height: 50px;
+  width: 60px;
+  height: 60px;
   border-radius: 35px;
   box-shadow: 5px 7px 3px #7d7d7d4d;
 `;
