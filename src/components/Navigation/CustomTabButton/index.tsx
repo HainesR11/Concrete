@@ -3,7 +3,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import styled from 'styled-components/native';
 import {
   faCalendarDay,
-  faHouseChimney,
   faLayerGroup,
   faListCheck,
   faPlus,

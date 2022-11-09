@@ -11,12 +11,6 @@ import { SideMenuButton } from '../../Button';
 import Seperator from '../../Seperator';
 import { faQuestionCircle } from '@fortawesome/free-regular-svg-icons';
 
-type TRouteProps = {
-  key: string;
-  name: string;
-  params: undefined;
-};
-
 const { height, width } = Dimensions.get('screen');
 
 const SideMenuContainer = styled.View`
@@ -46,6 +40,12 @@ const ButtonContainer = styled.View`
   display: flex;
   justify-content: space-around;
   align-items: center;
+`;
+
+const ProfilePicture = styled.Image`
+  width: 100%;
+  height: 100%;
+  border-radius: 20px;
 `;
 
 const PictureContainer = styled.View`
@@ -97,6 +97,7 @@ const HelpText = styled.Text`
 const Icon = styled(FontAwesomeIcon)``;
 
 const SideMenu = ({ navigation }) => {
+  const image = require('../../../assets/images/Profile.png');
   const setUserToken = useRootStore((state) => state.setUserToken);
   const route = navigation.getState().routes;
   const newRoutes = route.filter(
@@ -113,9 +114,15 @@ const SideMenu = ({ navigation }) => {
           onPress={() => navigation.dispatch(DrawerActions.closeDrawer())}>
           <Icon size={20} color={'black'} icon={faClose} />
         </CloseContainer>
-        <PictureContainer>
-          <Icon size={50} color={'white'} icon={faUser} />
-        </PictureContainer>
+        {image ? (
+          <PictureContainer>
+            <ProfilePicture source={image} />
+          </PictureContainer>
+        ) : (
+          <PictureContainer>
+            <Icon size={50} color={'white'} icon={faUser} />
+          </PictureContainer>
+        )}
         <TextContainer>
           <NameText>{Profile.Name}</NameText>
           <EmialText>{Profile.Email}</EmialText>

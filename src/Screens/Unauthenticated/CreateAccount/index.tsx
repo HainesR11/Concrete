@@ -1,17 +1,33 @@
 import React from 'react';
 import styled from 'styled-components/native';
-import LinearGradient from 'react-native-linear-gradient';
-import { useRootStore } from '../../../../store.js';
+import { Dimensions } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+// import { useRootStore } from '../../../../store.js';
 import { TStackNavigationParams } from '../../RootNavigation';
 import { DrawerNavigationProp } from '@react-navigation/drawer';
+import { useRootStore } from '../../../../store';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import {
+  faChevronLeft,
+  faEnvelope,
+  faLock,
+  faUser,
+} from '@fortawesome/free-solid-svg-icons';
+import Seperator from '../../../components/Seperator';
+import { GradientButton } from '../../../components/Button';
+import {
+  faFacebookF,
+  faGoogle,
+  faInstagram,
+} from '@fortawesome/free-brands-svg-icons';
 
-type TTextInputProps = {
-  width: number;
-  marginRight?: number;
-};
+const { width } = Dimensions.get('screen');
 
 type TNavigationProps = DrawerNavigationProp<TStackNavigationParams>;
+
+type TIconProps = {
+  color: string;
+};
 
 const CreateContrainer = styled.SafeAreaView`
   display: flex;
@@ -25,11 +41,13 @@ const InputContainer = styled.View`
   justify-content: space-around;
   padding: 0px 20px;
 `;
-const NameContainer = styled.View`
+
+const OptionTextContainer = styled.View`
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  width: 100%;
+  align-items: center;
+  opacity: 0.6;
 `;
 
 const HomeText = styled.Text`
@@ -43,88 +61,141 @@ const HomeText = styled.Text`
 `;
 const ImageContainer = styled.View`
   display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  height: 10%;
+  width: 90%;
 `;
 const Logo = styled.Image`
   width: 200;
   height: 100;
 `;
-const Input = styled.TextInput<TTextInputProps>`
+const Input = styled.TextInput`
+  margin-left: 15px;
+  width: 100%;
+`;
+
+const ButtonContainer = styled.View`
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 25%;
+`;
+
+const InputBoxContainer = styled.View`
   border-width: 2px;
   border-color: black;
   height: 40px;
   border-radius: 10px;
-  padding-left:  10px
-  width: ${(props) => props.width};
-  margin-right: ${(props) => props.marginRight}%;
+  padding-left: 10px;
   margin-bottom: 20px;
-`;
-
-const ButtonContainer = styled.View`
+  width: ${width - width / 4}px;
+  display: flex;
+  flex-direction: row;
   align-items: center;
-  margin-top: 40px;
-  width: 100%;
 `;
 
-const GradientContainer = styled.TouchableOpacity`
+const IconContainer = styled.TouchableOpacity`
+  flex: 1;
+`;
+
+const LogoContainer = styled.View`
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+`;
+
+const SeperatorContainer = styled.View`
+  width: 30%;
+`;
+
+const SocialIconContainer = styled.TouchableOpacity<TIconProps>`
+  background-color: ${(state) => state.color};
+  padding: 10px;
+  border-radius: 7px;
+`;
+
+const Text = styled.Text``;
+
+const Icon = styled(FontAwesomeIcon)``;
+
+const SocialsContainer = styled.View`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
   width: 60%;
-  height: 20%;
-  align-items: center,
-  justifyContent: center,
+  margin: 20px 0px;
 `;
-const LoginButton = styled.Text`
-  text-decoration: none;
-  color: white;
-`;
-
-const LoginText = styled.Text`
-  margin-top: 20px;
-  color: grey;
-`;
-
-const stylesGradient = {
-  width: '100%',
-  height: '100%',
-  borderRadius: 5,
-};
 
 const CreateAccount = () => {
   const setIsLoading = useRootStore((state) => state.setIsLoading);
   const navigation = useNavigation<TNavigationProps>();
 
+  const InputBox = ({ icon, text }) => {
+    return (
+      <InputBoxContainer>
+        <Icon icon={icon} />
+        <Input placeholder={text} />
+      </InputBoxContainer>
+    );
+  };
+
+  const OptionSelector = () => {
+    return (
+      <OptionTextContainer>
+        <SeperatorContainer>
+          <Seperator />
+        </SeperatorContainer>
+        <Text>Or connect using</Text>
+        <SeperatorContainer>
+          <Seperator />
+        </SeperatorContainer>
+      </OptionTextContainer>
+    );
+  };
+
+  const Header = () => {
+    return (
+      <ImageContainer>
+        <IconContainer onPress={() => navigation.navigate('Login')}>
+          <Icon icon={faChevronLeft} />
+        </IconContainer>
+        <LogoContainer>
+          <Logo
+            source={require('../../../assets/images/Concrete-logos_transparent.png')}
+          />
+        </LogoContainer>
+      </ImageContainer>
+    );
+  };
+
+  const SocialIcon = ({ icon, color }) => {
+    return (
+      <SocialIconContainer color={color}>
+        <Icon color="white" icon={icon} />
+      </SocialIconContainer>
+    );
+  };
+
   return (
     <CreateContrainer>
-      <ImageContainer>
-        <Logo
-          source={require('../../../assets/images/Concrete-logos_transparent.png')}
-        />
-      </ImageContainer>
+      <Header />
       <HomeText>Create account</HomeText>
       <InputContainer>
-        <NameContainer>
-          <Input placeholder="First Name" width={170} marginRight={3} />
-          <Input placeholder="Last Name" width={170} marginRight={0} />
-        </NameContainer>
-        <Input placeholder="Email" width={350} marginRight={0} />
-        <Input placeholder="Username" width={350} marginRight={0} />
-        <Input
-          placeholder="Password"
-          width={350}
-          marginRight={0}
-          secureTextEntry={true}
-        />
+        <InputBox icon={faUser} text={'Full name'} />
+        <InputBox icon={faEnvelope} text={'Email Address'} />
+        <InputBox icon={faLock} text={'Password'} />
       </InputContainer>
       <ButtonContainer>
-        <GradientContainer onPress={() => setIsLoading()}>
-          <LinearGradient
-            style={stylesGradient}
-            colors={['#04b4ff', '#0500ff', '#b400ff', '#ff00d6']}>
-            <LoginButton>Log in</LoginButton>
-          </LinearGradient>
-        </GradientContainer>
-        <LoginText onPress={() => navigation.navigate('Login')}>
-          Cancel
-        </LoginText>
+        <GradientButton fucntion={setIsLoading} text={'CreateAccount'} />
       </ButtonContainer>
+      <OptionSelector />
+      <SocialsContainer>
+        <SocialIcon icon={faFacebookF} color={'#4D59FF '} />
+        <SocialIcon icon={faInstagram} color={'pink'} />
+        <SocialIcon icon={faGoogle} color={'#FF3A3A '} />
+      </SocialsContainer>
     </CreateContrainer>
   );
 };

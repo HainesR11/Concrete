@@ -8,9 +8,14 @@ import { useNavigation } from '@react-navigation/native';
 import { useState } from 'react';
 // import { Buffer } from 'buffer';
 
-const LoginContainer = styled.SafeAreaView`
+type TContainerProps = {
+  darkMode: boolean;
+};
+
+const LoginContainer = styled.SafeAreaView<TContainerProps>`
   display: flex;
   flex-direction: column;
+  color: ${(state) => (state.darkMode ? 'white' : 'black')};
 `;
 
 const LogoContainer = styled.View`
@@ -92,7 +97,7 @@ const Login = () => {
   // const setIsLoading = useRootStore(
   //   (state: { setIsLoading: boolean }) => state.setIsLoading,
   // );
-  const setUserToken = useRootStore((state) => state.setUserToken);
+  const { setUserToken, darkMode } = useRootStore((state) => state);
   const navigation = useNavigation<TNavigationProps>();
   const [email, setEmail] = useState('');
   // const [password, setPassword] = useState('');
@@ -119,7 +124,7 @@ const Login = () => {
   };
 
   return (
-    <LoginContainer>
+    <LoginContainer darkMode={darkMode}>
       <LogoContainer>
         <Logo
           source={require('../../../assets/images/Concrete-logos_transparent.png')}
