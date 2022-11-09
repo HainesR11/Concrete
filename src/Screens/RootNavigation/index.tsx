@@ -104,9 +104,7 @@ const RootNavigation = () => {
             headerShown: false,
           }}>
           <Stack.Screen name="Login" component={Login} />
-          <Stack.Group>
-            <Stack.Screen name="CreateAccount" component={CreateAccount} />
-          </Stack.Group>
+          <Stack.Screen name="CreateAccount" component={CreateAccount} /> 
         </Stack.Navigator>
       )}
     </NavigationContainer>
