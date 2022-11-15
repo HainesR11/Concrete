@@ -68,8 +68,8 @@ const ImageContainer = styled.View`
   width: 90%;
 `;
 const Logo = styled.Image`
-  width: 200;
-  height: 100;
+  width: 200px;
+  height: 100px;
 `;
 const Input = styled.TextInput`
   margin-left: 15px;

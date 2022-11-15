@@ -1,27 +1,21 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   createNavigationContainerRef,
   NavigationContainer,
 } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { useRootStore } from '../../../store';
-import CustomHeader from '../../components/Navigation/Header';
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import SideMenu from '../../components/Navigation/sideMenu';
 import { useColorScheme } from 'react-native';
 import { DefaultTheme } from '@react-navigation/native';
 
 import 'react-native-gesture-handler';
 import 'react-native-reanimated';
 
-import Projects from '../Authenticated/Projects';
-import Friends from '../Authenticated/Friends';
-import Home from '../Authenticated/Home';
-import Profile from '../Authenticated/Profile';
-import Loading from '../Unauthenticated/Loading';
-import CreateAccount from '../Unauthenticated/CreateAccount';
-import Login from '../Unauthenticated/login';
-import { useEffect } from 'react';
+import { SideMenu, CustomHeader } from '../../components/Navigation';
+
+import { Projects, Friends, Home, Profile } from '../Authenticated';
+import { Login, Loading, CreateAccount } from '../Unauthenticated';
 
 export type TStackNavigationParams = {
   Login: undefined;
@@ -47,7 +41,7 @@ const RootNavigation = () => {
   theme.colors.background = '#e7e6e6';
   const { userToken, isLoading, setNavRef, setDarkMode, darkMode } =
     useRootStore((state) => state);
-  // const userTokenValue = true;
+  const userTokenValue = true;
 
   const navRef = createNavigationContainerRef();
 
@@ -81,7 +75,7 @@ const RootNavigation = () => {
           drawerContent={({ navigation }) => (
             <SideMenu navigation={navigation} />
           )}>
-          {/* TODO: change home to caleneder */}
+          {/* TODO: change caledner component */}
           <AuthDrawer.Screen name="Home" component={Home} />
           <AuthDrawer.Group>
             <AuthDrawer.Screen
@@ -104,7 +98,7 @@ const RootNavigation = () => {
             headerShown: false,
           }}>
           <Stack.Screen name="Login" component={Login} />
-          <Stack.Screen name="CreateAccount" component={CreateAccount} /> 
+          <Stack.Screen name="CreateAccount" component={CreateAccount} />
         </Stack.Navigator>
       )}
     </NavigationContainer>

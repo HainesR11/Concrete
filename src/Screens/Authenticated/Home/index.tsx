@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components/native';
 import ReactNativeCalendarStrip from 'react-native-calendar-strip';
 import moment from 'moment';
-import { Projects } from '../../../__mocks__/ProjectMocks';
+import { MockProjects } from '../../../__mocks__/ProjectMocks';
 import ProjectView from '../../../components/ProjectView';
 import { Tasks } from '../../../__mocks__/TaskMocks';
 import TaskView from '../../../components/Tasks/index';
@@ -52,6 +52,8 @@ const calendarStrip = {
 const Home = () => {
   const limit = 5;
 
+  const [date] = useState(new Date());
+
   const colorReturn = () => {
     return { color: 'white' };
   };
@@ -65,14 +67,14 @@ const Home = () => {
           calendarHeaderStyle={colorReturn()}
           dateNumberStyle={colorReturn()}
           dateNameStyle={colorReturn()}
-          selectedDate={moment().toDate()}
-          startingDate={moment().subtract(3, 'days').toDate()}
+          selectedDate={moment(date).toDate()}
+          startingDate={moment(date).toDate()}
         />
       </DateContainer>
       <ProjectContainer>
         <Title>My Projects</Title>
         <ViewContainer horizontal={true}>
-          {Projects.map((project, key) => {
+          {MockProjects.map((project, key) => {
             return <ProjectView key={key} project={project} />;
           })}
         </ViewContainer>
