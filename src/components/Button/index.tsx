@@ -1,34 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components/native';
 import { useRootStore, useUserStore } from '../../../store';
-import { TPaletteSubMap } from '../ColorScheme';
 import LinearGradient from 'react-native-linear-gradient';
-
-type TContainerProps = {
-  width: number;
-  height: number;
-  color: TPaletteSubMap;
-  selected: boolean;
-};
-
-type TRouteProps = {
-  key: string;
-  name: string;
-  params: undefined;
-};
-
-type TSideMenuProps = {
-  width: number;
-  height: number;
-  title: string;
-  route: string;
-  navKey: string;
-  navigation: any;
-};
-
-type TTextProps = {
-  selected: string;
-};
+import {
+  TTextProps,
+  TContainerProps,
+  TSideMenuProps,
+} from '../../types/ButtonTypes';
 
 const SideButtonTitleText = styled.Text<TTextProps>`
   font-size: 17px;
@@ -101,5 +79,19 @@ export const GradientButton = ({ fucntion, text }) => {
         <LoginButton>{text}</LoginButton>
       </LinearGradient>
     </GradientContainer>
+  );
+};
+
+const PopUpButtonContainer = styled.View``;
+const TouchOpacity = styled.TouchableOpacity``;
+const Text = styled.Text``;
+
+export const PopUpButton = ({ onPress, title, testId }) => {
+  return (
+    <PopUpButtonContainer testId={testId}>
+      <TouchOpacity onPress={() => onPress}>
+        <Text>{title}</Text>
+      </TouchOpacity>
+    </PopUpButtonContainer>
   );
 };

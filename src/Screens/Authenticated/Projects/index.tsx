@@ -6,6 +6,7 @@ import styled from 'styled-components/native';
 import { useUserStore } from '../../../../store';
 import { TColorOption } from '../../../components/ColorScheme';
 import { MockProjects } from '../../../__mocks__/ProjectMocks';
+// import PopUp from '../../../components/PopUp';
 
 const { width, height } = Dimensions.get('screen');
 
@@ -108,6 +109,19 @@ const ProfileIconContainer = styled.View<TCreateContainerProps>`
 `;
 
 const IconContainer = styled.View``;
+
+// const buttons = [
+//   {
+//     testId: 'ModalButtonYes',
+//     title: 'Yes',
+//     onPress: () => {},
+//   },
+//   {
+//     testId: 'ModalButtonNo',
+//     title: 'No',
+//     onPress: () => {},
+//   },
+// ];
 
 const Projects = () => {
   const { color } = useUserStore((state) => state);

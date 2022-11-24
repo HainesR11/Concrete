@@ -61,7 +61,7 @@ const RootNavigation = () => {
       ref={navRef}
       onReady={() => setNavRef(navRef.getCurrentRoute()?.key)}
       onStateChange={() => setNavRef(navRef.getCurrentRoute()?.key)}>
-      {userToken ? (
+      {userTokenValue ? (
         <AuthDrawer.Navigator
           screenOptions={{
             gestureHandlerProps: {

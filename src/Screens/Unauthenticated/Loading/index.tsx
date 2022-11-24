@@ -47,9 +47,7 @@ const Loading = () => {
       duration: 2500,
       easing: Easing.linear,
       useNativeDriver: false,
-    }).start(() => {
-      startAnimation();
-    });
+    }).start();
   };
 
   useEffect(() => {
