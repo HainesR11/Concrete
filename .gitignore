@@ -62,5 +62,8 @@ buck-out/
 /ios/Pods/
 /vendor/bundle/
 
-# Snyk 
+# Snyk
 .dccache
+
+# Package.lock.json
+./package.lock.json

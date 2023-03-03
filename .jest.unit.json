@@ -17,7 +17,9 @@
       "statements": 80
     }
   },
-  "transformIgnorePatterns": ["node_modules/(?!(@react-native|react-native|react-native-vector-icons)/)"],
+  "transformIgnorePatterns": [
+    "node_modules/(?!(@react-native|react-native|react-native-vector-icons)/)"
+  ],
   "reporters": [
     "default",
     [
