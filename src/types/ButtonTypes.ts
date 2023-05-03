@@ -1,9 +1,9 @@
-import { TPaletteSubMap } from '../components/ColorScheme';
+import { TColorOption } from '../components/ColorScheme';
 
 export type TContainerProps = {
   width: number;
   height: number;
-  color: TPaletteSubMap;
+  color: TColorOption;
   selected: boolean;
 };
 
@@ -23,5 +23,5 @@ export type TSideMenuProps = {
 };
 
 export type TTextProps = {
-  selected: string;
+  selected: boolean;
 };

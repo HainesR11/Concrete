@@ -19,6 +19,7 @@ export const Tasks = [
     ],
     DateCreated: '20 October 2022',
     DateCompleted: '',
+    Comments: [],
     DueDate: '26 September 2022',
     Icon: 'faHouse',
   },

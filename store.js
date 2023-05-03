@@ -1,9 +1,9 @@
-import create from 'zustand';
+import { create } from 'zustand';
 import { devtools, persist } from 'zustand/middleware';
 import { ColorPalette } from './src/components/ColorScheme';
 
 let rootStore = (set) => ({
-  userToken: false, // TODO: change false when connecting to DB
+  userToken: true, // TODO: change false when connecting to DB
   setUserToken: () => set((state) => ({ userToken: !state.userToken })),
   isLoading: false,
   setIsLoading: () => set((state) => ({ isLoading: !state.isLoading })),
@@ -14,6 +14,13 @@ let rootStore = (set) => ({
 });
 
 let userStore = (set) => ({
+  userInfo: {
+    Profile: {},
+    Projects: [],
+    People: [],
+    Tasks: [],
+  },
+  setUserInfo: (info) => set(() => ({ userInfo: info })),
   color: ColorPalette.Blue,
   setColor: (color) => set(() => ({ color: color })),
 });

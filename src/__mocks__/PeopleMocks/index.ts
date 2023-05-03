@@ -1,1 +1,1 @@
-export const People = [{}];
+export const PeopleMock = [{}];

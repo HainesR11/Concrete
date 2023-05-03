@@ -4,7 +4,7 @@ import { useRootStore } from '../../../../store';
 import { faClose, faUser, faUserPlus } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { Dimensions } from 'react-native';
-import { Profile } from '../../../__mocks__/ProfileMock';
+import { ProfileMock } from '../../../__mocks__/ProfileMock';
 import { DrawerActions } from '@react-navigation/native';
 import { ColorPalette } from '../../ColorScheme';
 import { SideMenuButton } from '../../Button';
@@ -21,7 +21,9 @@ const SideMenuContainer = styled.View`
   padding-bottom: 30px;
   z-index: 105;
 `;
-const LogoutButton = styled.Button``;
+const LogoutButton = styled.Button`
+  background-color: transparent;
+`;
 
 const ProfileView = styled.View`
   display: flex;
@@ -64,7 +66,7 @@ const NameText = styled.Text`
   color: white;
 `;
 
-const EmialText = styled.Text`
+const EmailText = styled.Text`
   font-size: 10px;
   padding-top: 10px;
   font-weight: 500;
@@ -101,11 +103,10 @@ const SideMenu = ({ navigation }) => {
   const setUserToken = useRootStore((state) => state.setUserToken);
   const route = navigation.getState().routes;
   const newRoutes = route.filter(
-    (routeName: any) => routeName.name !== 'Profile',
+    (routeName: any) =>
+      routeName.name !== 'Profile' && routeName.name !== 'CreateProject',
   );
   const navState = useRootStore((state) => state.navRef);
-
-  // const route = '';
 
   return (
     <SideMenuContainer>
@@ -124,14 +125,12 @@ const SideMenu = ({ navigation }) => {
           </PictureContainer>
         )}
         <TextContainer>
-          <NameText>{Profile.Name}</NameText>
-          <EmialText>{Profile.Email}</EmialText>
+          <NameText>{ProfileMock.Name}</NameText>
+          <EmailText>{ProfileMock.Email}</EmailText>
         </TextContainer>
       </ProfileView>
       <ButtonContainer>
         {newRoutes.map((key: { name: string; key: string }, name: number) => {
-          console.log(key.name);
-          console.log(key.key);
           return (
             <SideMenuButton
               title={key.name}

@@ -1,4 +1,4 @@
-export const Profile = {
+export const ProfileMock = {
   Name: 'Rhys Haines',
   DefaultColor: 'blue',
   UserName: 'RhysHaines',

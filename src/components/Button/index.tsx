@@ -88,7 +88,7 @@ const Text = styled.Text``;
 
 export const PopUpButton = ({ onPress, title, testId }) => {
   return (
-    <PopUpButtonContainer testId={testId}>
+    <PopUpButtonContainer testID={testId}>
       <TouchOpacity onPress={() => onPress}>
         <Text>{title}</Text>
       </TouchOpacity>
